@@ -1,16 +1,16 @@
 import styles from '../styles/headerbar.module.css';
+import { useRouter } from 'next/router'
+import { inter } from '../utils/fonts';
 export default function Navbar(props) {
+    const router = useRouter()
     return (
-        
-        
-        <div className={styles.headerbar}>
+        <header className={styles.headerbar}>
             {props.homePage ? (<div>
                 Searchbar
-            </div>) : (<button>
-                Backbutton
+            </div>) : (<button className={styles.backButton} onClick={() => router.back()}>
+                <i className={`bi bi-arrow-left ${styles.buttonArrow}`}></i>
             </button>)}
-        
-            <div>{props.pageName}</div>   
-        </div>
+            <div className={`${styles.pageName} ${inter.className}`}>{props.pageName}</div> 
+        </header>
     );
 }
