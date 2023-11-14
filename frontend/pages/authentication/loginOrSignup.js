@@ -1,6 +1,29 @@
+import { useState } from "react";
 import Navbar from "../../components/navbar";
 import { inter } from "../../utils/fonts";
 export default function Login() {
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+        confirmPassword: "",
+        loginUsername: "",
+        loginPassword: ""
+    });
+
+    const updateForm = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
+    const doRegister = () => {
+        if (formData.password != formData.confirmPassword) {
+            alert("Passwords are not the same!");
+        }
+        
+    }
+
+    const doLogin = () => {
+
+    }
     return (
         <div className={inter.className}>
             <title>Register or Log In</title>
@@ -12,31 +35,35 @@ export default function Login() {
                             Register
                         </h2>
                         <form>
-                            <label for="Username">Username</label>
-                            <input type="text" id="Username" name="Username"></input>
-                            <label for="Password">Password</label>
-                            <input type="password" id="Password" name="Password"></input>
-                            <label for="ConfirmPassword">Confirm Password</label>
-                            <input type="password" id="ConfirmPassword" name="ConfirmPassword"></input>
+                            <label>Username</label>
+                            <input type="text" name="username" value={formData.username} onChange={updateForm}></input>
+                            <label>Password</label>
+                            <input type="password" name="password" value={formData.password} onChange={updateForm}></input>
+                            <label>Confirm Password</label>
+                            <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={updateForm}></input>
+                            
                         </form>
+                        <button className={`${inter.className} submitButton`} onClick={doRegister}>
+                                Register
+                            </button>
                     </section>
                     <section id="Section2">
                         <h2>
                             Log In
                         </h2>
                         <form>
-                            <label for="Username">Username</label>
-                            <input type="text" id="Username" name="Username"></input>
-                            <label for="Password">Password</label>
-                            <input type="password" id="Password" name="Password"></input>
+                            <label>Username</label>
+                            <input type="text" name="loginUsername" value={formData.loginUsername} onChange={updateForm}></input>
+                            <label>Password</label>
+                            <input type="password" name="loginPassword" value={formData.loginPassword} onChange={updateForm}></input>
                            
                         </form>
+                        <button className={`${inter.className} submitButton`} onClick={doLogin}>
+                            Log In
+                        </button>
                     </section>
                     
                 </div>
-                <button className={inter.className} id="submitButton">
-                        Submit
-                </button>
             </main>
             <style jsx>{
             `
@@ -70,20 +97,21 @@ export default function Login() {
                     
                 }
                 #Section2 {
-                    margin-left: 20vw;
+                    margin-left: 25vw;
                 }
-                #submitButton {
+                .submitButton {
                     background-color: rgba(39, 93, 56, 1);
                     color: white;
                     font-size: 30px;
-                    position: absolute;
-                    right: 100px;
+                    position: relative;
+                    top: 50px;
+                    left: calc(25vw - 150px);
                     width: 150px;
                     height: 60px;
                     border-width: 0px;
                     transition: 250ms;
                 }
-                #submitButton:hover {
+                .submitButton:hover {
                     background-color: rgba(59, 113, 76, 1);
                 }
                 `
