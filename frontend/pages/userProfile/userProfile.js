@@ -37,17 +37,22 @@ export default function userProfile() {
                     You have {userData.points} points
                 </div>
             </main>
-            <style jsx>{
+            <style jsx>
+            {
+                `   
+                    #myBody {
+                        margin-left: 32px;
+                        margin-right: 32px;
+                    }
+                    h2 {
+                        font-size: 50px;
+                    }
+                    .pointsCounter {
+                        font-size: 100px;
+                        color: #B16A00;
+                    }
                 `
-                #myBody: {
-                    margin-left: 32px;
-                    margin-right: 32px;
-                }
-                .pointsCounter: {
-                    color: #B16A00;
-                    font-size: 100px;
-                }
-                `}
+            }
             </style>
         </div>
     )

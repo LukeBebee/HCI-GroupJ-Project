@@ -9,7 +9,7 @@ export default async function handler(req, res) {
             try {
                 const myuser = await user.findById(req.query.id);
                 
-                res.status(200).json({ success: true, data: {user_name: myuser.user_name, points: 123} })
+                res.status(200).json({ success: true, data: {user_name: myuser.user_name, points: myuser.points} })
             } catch (error) {
                 console.log(error);
                 res.status(400).json({ success: false, errorCode: error })

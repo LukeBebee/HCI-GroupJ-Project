@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
     {
-        user_name: {type: String, required: true, maxLength: 64},
-        password: {type: String, required: true, maxLength: 64}
+        user_name: {type: String, required: true},
+        password: {type: String, required: true},
+        points: {type: Number, required: true, default: 0}
     }
 )
 
