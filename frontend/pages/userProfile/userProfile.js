@@ -30,7 +30,7 @@ export default function userProfile() {
     }, []) // run only on first render
     return (
         <div>
-            <Navbar pageName="User Profile" homePage={false}/>
+            <Navbar pageName="User Profile" homePage={false} userPages={true}/>
             <main id="myBody">
                 <h2 className={inter.className}>Hello, {userData.user_name}!</h2>
                 <div className={`pointsCounter ${leagueGothic.className}`}>
