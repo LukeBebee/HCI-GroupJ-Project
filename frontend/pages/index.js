@@ -1,63 +1,49 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import Navbar from '../components/navbar';
+import { inter } from "../utils/fonts";
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className={styles.container}>
+      <Navbar pageName="Montreal Election Information" homePage={true}/>
       <Head>
-        <title>Create Next App</title>
+        <title>Election Information</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
+      <>
+        
+        <Image
+              priority
+              src="/images/montreal.jpg"
+              width={683}
+              height={384}
+              alt="Montreal Skyline"
+            />
+      </>
+        
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Input your location or log in to begin!
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+        <a href="" className={styles.card}>
+            <h3>Enter Location &rarr;</h3>
+            <p>Find information based on your election location</p>
           </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+          <a href="/authentication/loginOrSignup" className={styles.card}>
+            <h3>Login &rarr;</h3>
+            <p>Log in to the app to access more features</p>
           </a>
         </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
+        
       </footer>
 
       <style jsx>{`
@@ -86,6 +72,14 @@ export default function Home() {
           align-items: center;
           text-decoration: none;
           color: inherit;
+        }
+        h1 {
+          font-size: 50px;
+          font-weight: 300;
+        }
+        h2 {
+          font-size: 50px;
+          font-weight: 200;
         }
         code {
           background: #fafafa;
