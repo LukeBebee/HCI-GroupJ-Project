@@ -1,8 +1,10 @@
 import Navbar from "../../components/navbar";
 import { inter, leagueGothic } from "../../utils/fonts";
 import { useState, useEffect } from 'react';
+import { useRouter } from "next/router";
 
 export default function userProfile() {
+    const router = useRouter();
     const [userData, setUserData] = useState({
         user_name: "",
         points: 0
@@ -23,6 +25,8 @@ export default function userProfile() {
                 
             } catch (error) {
                 alert("Error occurred while finding user!")
+                localStorage.setItem("userId", "");
+                router.back();
                 console.log(error);
             }
         }
