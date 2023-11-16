@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Navbar from "../../components/navbar";
 import { inter } from "../../utils/fonts";
+import { useRouter } from "next/router";
 export default function Login() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -15,6 +17,7 @@ export default function Login() {
     }
 
     const doRegister = async () => {
+        
         if (formData.password != formData.confirmPassword) {
             alert("Passwords are not the same!");
         }
@@ -26,7 +29,11 @@ export default function Login() {
             if (!res.ok) {
                 throw new Error(res.status.toString());
             }
+            const data = await res.json();
+            localStorage.setItem("userId", data.data._id);
+            router.push('/userProfile/userProfile');
         } catch (error) {
+            alert("Error occurred during user creation!")
             console.log(error);
         }
     }
