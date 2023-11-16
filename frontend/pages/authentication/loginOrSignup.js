@@ -38,8 +38,22 @@ export default function Login() {
         }
     }
 
-    const doLogin = () => {
-
+    const doLogin = async () => {
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                body: JSON.stringify({user_name: formData.loginUsername, password: formData.loginPassword})
+            })
+            if (!res.ok) {
+                throw new Error(res.status.toString());
+            }
+            const data = await res.json();
+            localStorage.setItem("userId", data.data._id);
+            router.push('/userProfile/userProfile');
+        } catch (error) {
+            alert("Credentials incorrect or error occurred")
+            console.log(error);
+        }
     }
     return (
         <div className={inter.className}>
