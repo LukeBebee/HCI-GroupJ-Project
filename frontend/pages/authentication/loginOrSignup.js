@@ -14,11 +14,21 @@ export default function Login() {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    const doRegister = () => {
+    const doRegister = async () => {
         if (formData.password != formData.confirmPassword) {
             alert("Passwords are not the same!");
         }
-        
+        try {
+            const res = await fetch('/api/user', {
+                method: 'POST',
+                body: JSON.stringify({user_name: formData.username, password: formData.password})
+            })
+            if (!res.ok) {
+                throw new Error(res.status.toString());
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const doLogin = () => {
