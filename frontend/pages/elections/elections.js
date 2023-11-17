@@ -3,6 +3,9 @@ import Head from 'next/head';
 import { useState, useEffect } from "react"
 import ElectionInfo from '../../components/electionInfo';
 import { inter } from '../../utils/fonts';
+import Link from 'next/link';
+import Image from 'next/image';
+
 export default function Elections() {
     const [ myData, setMyData ] = useState({zip: "", electionsData: null});
     useEffect(() => {
@@ -41,6 +44,18 @@ export default function Elections() {
                     <ElectionInfo ElectionType={myData.electionsData?.fedData?.name} ElectionDate={myData.electionsData?.fedData?.election_date}/>
                     <ElectionInfo ElectionType={myData.electionsData?.provData?.name} ElectionDate={myData.electionsData?.provData?.election_date}/>
                 </div>
+                <Link href="https://www.electionsquebec.qc.ca/en/vote/making-sure-your-name-is-on-the-list-of-electors/">
+                    <div className ="linkContainer">
+                    <Image  
+                            src="/images/elections-quebec.jpg"
+                            width={179}
+                            height={52}
+                            alt="Elections Quebec"
+                        />
+                        <p>Check your eligibility to vote in Quebec here!</p>
+                        
+                    </div>
+                </Link>
             </main>
             <style jsx>
                 {
@@ -50,6 +65,12 @@ export default function Elections() {
                             flex-direction: row;
                             height: 580px;
                             gap: 20px;
+                        }
+                        .linkContainer {
+                            display: flex;
+                            flex-direction: row;
+                            height: 100px;
+                            gap: 10px;
                         }
                     `
                 }
