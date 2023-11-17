@@ -5,41 +5,51 @@ import Navbar from '../../components/navbar';
 import { inter } from "../../utils/fonts";
 import Image from 'next/image';
 import Link from 'next/link'; // Import Link from Next.js
+import { useState, useEffect } from 'react';
 
 export default function Menu() {
+
+  const [ myData, setMyData ] = useState({zip: ""});
+  useEffect(() => {
+    setMyData({zip: sessionStorage.getItem("zipcode")});
+  }, []);
+
   return (
-    <div className={styles.container}>
-      <Navbar pageName="Menu" homePage={false}/>
+    <div>
+      <Navbar pageName={myData.zip} homePage={false}/>
       <Head>
         <title>Election Information</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         {/* Wrap each block with Link */}
-        <Link href="/elections">
-          <div className={styles.menuBlock}>
-            <Image src="/images/elections.jpg" alt="Icon 1" width={50} height={50} />
-            <h2>Elections</h2>
-            <Image src="/images/arrow.jpg" alt="Arrow" width={30} height={30} />
+
+        <Link href="/elections/elections" style={{textDecoration: "none"}}>
+          <div className="menuBlock"> 
+            <i className="bi bi-clipboard-data bigIcon"></i>
+            <h2 className={inter.className}>Elections</h2>
+            <div></div>
+            <i className="bi bi-chevron-double-right rightChev"></i>
           </div>
         </Link>
-        
-        <Link href="/news">
-          <div className={styles.menuBlock}>
-            <Image src="/images/news.jpg" alt="Icon 2" width={50} height={50} />
-            <h2>News</h2>
-            <Image src="/images/arrow.jpg" alt="Arrow" width={30} height={30} />
-          </div>
+        <Link href="/news" style={{textDecoration: "none"}}>
+        <div className="menuBlock"> 
+            <i className="bi bi-newspaper bigIcon"></i>
+            <h2 className={inter.className}>News</h2>
+            <div></div>
+            <i className="bi bi-chevron-double-right rightChev"></i>
+      </div>    
         </Link>
-        <Link href="/representatives">
-          <div className={styles.menuBlock}>
-            <Image src="/images/representatives.jpg" alt="Icon 3" width={50} height={50} />
-            <h2>Representatives</h2>
-            <Image src="/images/arrow.jpg" alt="Arrow" width={30} height={30} />
-            </div>
+        <Link href="/representatives" style={{textDecoration: "none"}}>
+        <div className="menuBlock"> 
+            <i className="bi bi-person-video2 bigIcon"></i>
+            <h2 className={inter.className}>Representatives</h2>
+            <div></div>
+            <i className="bi bi-chevron-double-right rightChev"></i>
+          </div>
+
         </Link>
       </main>
-
       <style jsx>{`
         main {
           display: flex;
@@ -47,19 +57,22 @@ export default function Menu() {
           align-items: center; /* Center items horizontally */
           background-color: #f5f5f5; /* Set the background color */
           padding: 20px;
+          height: calc(100vh - 70px);
         }
         /* Style the Link component as a block */
         .menuBlock {
-          display: flex;
+          display: grid;
+          grid-template-columns: 50px auto auto 50px;
           align-items: center; /* Center items vertically */
           background-color: #e0e0e0; /* Slightly darker background color */
           padding: 20px;
-          text-align: center;
+          text-align: left;
           border-radius: 10px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
           margin-bottom: 20px; /* Add margin between blocks */
           text-decoration: none; /* Remove default link underline */
           color: black; /* Set link color */
+          width: 90vw;
         }
         .menuBlock:hover {
           background-color: #d0d0d0; /* Darken on hover */
@@ -67,6 +80,13 @@ export default function Menu() {
         h2 {
           font-size: 24px;
           margin: 0 20px; /* Add space around text */
+        }
+        .bigIcon {
+          font-size: 50px;
+        }
+        .rightChev {
+          font-size: 30px;
+          
         }
       `}</style>
 
