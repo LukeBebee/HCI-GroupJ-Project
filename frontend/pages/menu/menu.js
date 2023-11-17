@@ -23,7 +23,7 @@ export default function Menu() {
       </Head>
       <main>
         {/* Wrap each block with Link */}
-        <Link href="/elections" style={{textDecoration: "none"}}>
+        <Link href="/elections/elections" style={{textDecoration: "none"}}>
           <div className="menuBlock"> 
             <i className="bi bi-clipboard-data bigIcon"></i>
             <h2 className={inter.className}>Elections</h2>

@@ -12,6 +12,23 @@ export default function Home() {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
+  const doZipFind = async (zip) => {
+    try {
+        const res = await fetch(`/api/zipInfo/${zip}`, {
+            method: 'GET'
+        })
+        if (!res.ok) {
+            throw new Error(res.status.toString());
+        }
+        const data = await res.json();
+        sessionStorage.setItem("zipAssocData", data.data);
+        router.push('menu/menu');
+    } catch (error) {
+        alert("Zip search error")
+        console.log(error);
+    }
+  }
+
   const search = () => {
     const strippedZip = formData.zipCode.replace(/\s/g, "").toUpperCase();
     setFormData({...formData, zipCode: strippedZip});
@@ -21,7 +38,7 @@ export default function Home() {
     } else {
       sessionStorage.setItem("zipcode", strippedZip);
       //TODO: Push to menu page
-      router.push("menu/menu");
+      doZipFind(strippedZip);
     }
   }
   return (
