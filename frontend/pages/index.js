@@ -21,6 +21,7 @@ export default function Home() {
     } else {
       sessionStorage.setItem("zipcode", strippedZip);
       //TODO: Push to menu page
+      router.push("menu/menu");
     }
   }
   return (
@@ -52,7 +53,7 @@ export default function Home() {
               id="bigImage"
               fill={true}
               alt="Montreal Skyline"
-              style={{objectFit: "cover", opacity: 0.15, position: "absolute", "z-index": "-1"}}
+              style={{objectFit: "cover", opacity: 0.15, position: "absolute", zIndex: "-1"}}
             />
          </div>
       </main>
