@@ -17,25 +17,26 @@ export default function Menu() {
       <main>
         {/* Wrap each block with Link */}
         <Link href="/elections">
-          
+          <div className={styles.menuBlock}>
             <Image src="/images/elections.jpg" alt="Icon 1" width={50} height={50} />
             <h2>Elections</h2>
             <Image src="/images/arrow.jpg" alt="Arrow" width={30} height={30} />
-          
+          </div>
         </Link>
+        
         <Link href="/news">
-          
+          <div className={styles.menuBlock}>
             <Image src="/images/news.jpg" alt="Icon 2" width={50} height={50} />
             <h2>News</h2>
             <Image src="/images/arrow.jpg" alt="Arrow" width={30} height={30} />
-          
+          </div>
         </Link>
         <Link href="/representatives">
-          
+          <div className={styles.menuBlock}>
             <Image src="/images/representatives.jpg" alt="Icon 3" width={50} height={50} />
             <h2>Representatives</h2>
             <Image src="/images/arrow.jpg" alt="Arrow" width={30} height={30} />
-          
+            </div>
         </Link>
       </main>
 
