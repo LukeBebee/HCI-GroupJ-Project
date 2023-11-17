@@ -1,8 +1,10 @@
 import Navbar from "../../components/navbar";
 import { inter, leagueGothic } from "../../utils/fonts";
 import { useState, useEffect } from 'react';
+import { useRouter } from "next/router";
 
 export default function userProfile() {
+    const router = useRouter();
     const [userData, setUserData] = useState({
         user_name: "",
         points: 0
@@ -23,6 +25,8 @@ export default function userProfile() {
                 
             } catch (error) {
                 alert("Error occurred while finding user!")
+                localStorage.setItem("userId", "");
+                router.back();
                 console.log(error);
             }
         }
@@ -30,24 +34,29 @@ export default function userProfile() {
     }, []) // run only on first render
     return (
         <div>
-            <Navbar pageName="User Profile" homePage={false}/>
+            <Navbar pageName="User Profile" homePage={false} userPages={true}/>
             <main id="myBody">
                 <h2 className={inter.className}>Hello, {userData.user_name}!</h2>
                 <div className={`pointsCounter ${leagueGothic.className}`}>
                     You have {userData.points} points
                 </div>
             </main>
-            <style jsx>{
+            <style jsx>
+            {
+                `   
+                    #myBody {
+                        margin-left: 32px;
+                        margin-right: 32px;
+                    }
+                    h2 {
+                        font-size: 50px;
+                    }
+                    .pointsCounter {
+                        font-size: 100px;
+                        color: #B16A00;
+                    }
                 `
-                #myBody: {
-                    margin-left: 32px;
-                    margin-right: 32px;
-                }
-                .pointsCounter: {
-                    color: #B16A00;
-                    font-size: 100px;
-                }
-                `}
+            }
             </style>
         </div>
     )

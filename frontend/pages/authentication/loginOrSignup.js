@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../../components/navbar";
 import { inter } from "../../utils/fonts";
 import { useRouter } from "next/router";
+
 export default function Login() {
     const router = useRouter();
     const [formData, setFormData] = useState({
@@ -38,13 +39,27 @@ export default function Login() {
         }
     }
 
-    const doLogin = () => {
-
+    const doLogin = async () => {
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                body: JSON.stringify({user_name: formData.loginUsername, password: formData.loginPassword})
+            })
+            if (!res.ok) {
+                throw new Error(res.status.toString());
+            }
+            const data = await res.json();
+            localStorage.setItem("userId", data.data._id);
+            router.push('/userProfile/userProfile');
+        } catch (error) {
+            alert("Credentials incorrect or error occurred")
+            console.log(error);
+        }
     }
     return (
-        <div className={inter.className}>
+        <div className={`${inter.className}`}>
             <title>Register or Log In</title>
-            <Navbar pageName="Register or Log In" homePage={false}/>
+            <Navbar pageName="Register or Log In" homePage={false} userPages={true}/>
             <main>
                 <div className="loginSplit">
                     <section id="Section1">
