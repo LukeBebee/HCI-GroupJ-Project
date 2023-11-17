@@ -31,7 +31,7 @@ export default function Home() {
 
 
         <div className={styles.grid}>
-        <a href="" className={styles.card}>
+        <a href="menu/menu" className={styles.card}>
             <h3>Enter Location &rarr;</h3>
             <p>Find information based on your election location</p>
           </a>
