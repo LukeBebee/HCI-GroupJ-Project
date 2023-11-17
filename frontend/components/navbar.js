@@ -16,7 +16,7 @@ export default function Navbar(props) {
     return (
         <header className={`${styles.headerbar} ${props.homePage ? styles.headerBarOverride : ""}`}>
             {props.homePage ? (<div>
-               
+
             </div>) : (<button className={styles.backButton} onClick={() => router.back()}>
                 <i className={`bi bi-arrow-left ${styles.buttonArrow}`}></i>
             </button>)}
