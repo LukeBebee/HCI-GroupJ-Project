@@ -23,6 +23,7 @@ export default function Menu() {
       </Head>
       <main>
         {/* Wrap each block with Link */}
+
         <Link href="/elections/elections" style={{textDecoration: "none"}}>
           <div className="menuBlock"> 
             <i className="bi bi-clipboard-data bigIcon"></i>
@@ -46,6 +47,7 @@ export default function Menu() {
             <div></div>
             <i className="bi bi-chevron-double-right rightChev"></i>
           </div>
+
         </Link>
       </main>
       <style jsx>{`
