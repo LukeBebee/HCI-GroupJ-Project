@@ -39,7 +39,7 @@ export default function Menu() {
             <i className="bi bi-chevron-double-right rightChev"></i>
       </div>    
         </Link>
-        <Link href="/representatives" style={{textDecoration: "none"}}>
+        <Link href="/representatives/representatives" style={{textDecoration: "none"}}>
         <div className="menuBlock"> 
             <i className="bi bi-person-video2 bigIcon"></i>
             <h2 className={inter.className}>Representatives</h2>

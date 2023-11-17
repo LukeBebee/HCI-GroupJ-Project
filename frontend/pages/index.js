@@ -21,7 +21,7 @@ export default function Home() {
             throw new Error(res.status.toString());
         }
         const data = await res.json();
-        sessionStorage.setItem("zipAssocData", data.data);
+        sessionStorage.setItem("zipAssocData", JSON.stringify(data.data));
         router.push('menu/menu');
     } catch (error) {
         alert("Zip search error")
