@@ -10,7 +10,9 @@ export default function Navbar(props) {
             router.push("/authentication/loginOrSignup");
         }
     }
-
+    const homeButtonClicked = () => {
+        router.push('/')
+    }
     return (
         <header className={`${styles.headerbar} ${props.homePage ? styles.headerBarOverride : ""}`}>
             {props.homePage ? (<div>
@@ -24,6 +26,11 @@ export default function Navbar(props) {
             {
                 props.userPages ? <div></div> : <button className={styles.profileButton} onClick={profileButtonClicked}>
                     <i className={`bi bi-person ${styles.buttonPerson}`}></i>
+                </button>
+            }
+            {
+                props.homePage ? <div></div> : <button className={styles.profileButton} onClick={homeButtonClicked}>
+                        <i className={`bi bi-house-door ${styles.buttonPerson}`}></i>
                 </button>
             }
         </header>
