@@ -35,10 +35,17 @@ export default function Home() {
     const valid = /^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(strippedZip);
     if (!valid) {
       alert("Invalid zip code!");
-    } else {
-      sessionStorage.setItem("zipcode", strippedZip);
-      //TODO: Push to menu page
-      doZipFind(strippedZip);
+    }
+    else {
+      const firstThree = strippedZip.slice(0, 3);
+      if (firstThree < "H1A" || firstThree > "H5B") {
+        alert("Unfortunately, we currently only service Montreal postal codes.");
+      }
+      else {
+        sessionStorage.setItem("zipcode", strippedZip);
+        //TODO: Push to menu page
+        doZipFind(strippedZip);
+      }
     }
   }
   return (
