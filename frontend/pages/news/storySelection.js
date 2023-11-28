@@ -14,9 +14,11 @@ export default function Menu() {
     setMyData({zip: sessionStorage.getItem("zipcode")});
   }, []);
 
+  const montrealBoolean = (myData.zip.charAt(0) === "H");
+
   return (
     <div>
-      <Navbar pageName={myData.zip} homePage={false}/>
+      <Navbar pageName={myData.zip + " News Stories"} homePage={false}/>
       <Head>
         <title>Election Information</title>
         <link rel="icon" href="/favicon.ico" />
@@ -24,31 +26,20 @@ export default function Menu() {
       <main>
         {/* Wrap each block with Link */}
 
-        <Link href="/elections/elections" style={{textDecoration: "none"}}>
-          <div className="menuBlock"> 
-            <i className="bi bi-clipboard-data bigIcon"></i>
-            <h2 className={inter.className}>Elections</h2>
-            <div></div>
-            <i className="bi bi-chevron-double-right rightChev"></i>
-          </div>
-        </Link>
-        <Link href="/news/storySelection" style={{textDecoration: "none"}}>
+        {!montrealBoolean &&
+        <h2>No news stories available for your postal code.</h2>   
+    }
+
+    {montrealBoolean &&
+        <Link href="./news" style={{textDecoration: "none"}}>
         <div className="menuBlock"> 
             <i className="bi bi-newspaper bigIcon"></i>
-            <h2 className={inter.className}>News</h2>
+            <h2 className={inter.className}>Montreal News: Notice – Intention to Withdraw Authorization: Quartiers Montréal</h2>
             <div></div>
             <i className="bi bi-chevron-double-right rightChev"></i>
       </div>    
         </Link>
-        <Link href="/representatives/representatives" style={{textDecoration: "none"}}>
-        <div className="menuBlock"> 
-            <i className="bi bi-person-video2 bigIcon"></i>
-            <h2 className={inter.className}>Representatives</h2>
-            <div></div>
-            <i className="bi bi-chevron-double-right rightChev"></i>
-          </div>
-
-        </Link>
+    }
       </main>
       <style jsx>{`
         main {
