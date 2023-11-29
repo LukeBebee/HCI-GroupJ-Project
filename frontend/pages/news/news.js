@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+
+import { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar';
 import Head from 'next/head';
 import { inter } from '../../utils/fonts';
 
 
 // Example function to update user status in the database
-const updateUserStatus = async () => {
+const updateUserStatus = async (userId) => {
     // Implement the logic to update the user's status in your database
     // This could involve making a request to your server or using a client-side SDK
     console.log("Updating user status in the database...");
-
     
+    // TODO add a point to the user with userID
 
     // Example: Using fetch to make a POST request to your server
     // Replace this with the actual logic for your database update
@@ -18,7 +19,39 @@ const updateUserStatus = async () => {
   };
 
 export default function News() {
-    const loggedIn = false;
+  var loggedIn = false;
+  var userId = "";
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`/api/userData/${localStorage.getItem('userId')}`, {
+          method: 'GET'
+        })
+        if (!res.ok) {
+          throw new Error(res.status.toString());
+        }
+        else {
+          loggedIn = true;
+          
+        }
+        const data = await res.json();
+        console.log(data);
+        setUserData(data.data);
+        userId = data.data;
+        
+
+      } catch (error) {
+        //alert("Error occurred while finding user!")
+        localStorage.setItem("userId", "");
+        
+      }
+    }
+    fetchData();
+  }, []) // run only on the first render
+
+
+
+    
 
 
   // State to store user responses and correctness
@@ -45,7 +78,7 @@ const [doneClicked, setDoneClicked] = useState(false);
 
     // Update the user's status in the database
     try {
-      await updateUserStatus();
+      await updateUserStatus(userId);
       setDoneClicked(true);
       console.log("User status updated successfully.");
     } catch (error) {
