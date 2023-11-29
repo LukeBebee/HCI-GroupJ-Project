@@ -19,7 +19,7 @@ export default function Menu() {
   const montrealBoolean = !(myData.zip.slice(0, 3) < "H1A" || myData.zip.slice(0, 3) > "H5B");
   
   return (
-    <div>
+    <div className={inter.className}>
       <Navbar pageName={myData.zip + " News Stories"} homePage={false}/>
       <Head>
         <title>Election Information</title>
@@ -29,7 +29,7 @@ export default function Menu() {
         {/* Wrap each block with Link */}
 
         {!montrealBoolean &&
-        <h2> No news stories currently available for your postal code. </h2>   
+        <h2> No news stories are currently available for your postal code. </h2>   
     }
 
     {montrealBoolean &&
@@ -73,6 +73,7 @@ export default function Menu() {
         h2 {
           font-size: 24px;
           margin: 0 20px; /* Add space around text */
+
         }
         .bigIcon {
           font-size: 50px;

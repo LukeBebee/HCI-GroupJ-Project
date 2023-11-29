@@ -68,7 +68,7 @@ export default function Elections() {
                 }
                 { !montrealBoolean &&
                 <div>
-                    <h2>No election information currently available for your postal code.</h2>
+                    <h2>No election information is currently available for your postal code.</h2>
                     
                 </div>
                 }
