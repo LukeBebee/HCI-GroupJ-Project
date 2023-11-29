@@ -106,6 +106,8 @@ const [doneClicked, setDoneClicked] = useState(false);
             <br/>
             <br/>Jean-François Blanchet
             <br/>Chief Electoral Officer
+            <br/>
+            <br/>Source: <a href="https://www.electionsquebec.qc.ca/en/news/notice-intention-to-withdraw-authorization-quartiers-montreal/">Elections Quebec</a>
 
 
 
