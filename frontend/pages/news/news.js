@@ -9,6 +9,9 @@ const updateUserStatus = async () => {
     // Implement the logic to update the user's status in your database
     // This could involve making a request to your server or using a client-side SDK
     console.log("Updating user status in the database...");
+
+    
+
     // Example: Using fetch to make a POST request to your server
     // Replace this with the actual logic for your database update
     // await fetch('/api/updateUserStatus', { method: 'POST' });

@@ -1,11 +1,13 @@
 // components/Menu.js
-import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
+
 import Navbar from '../../components/navbar';
-import { inter } from "../../utils/fonts";
+import styles from '../../styles/Home.module.css';
+import Head from 'next/head';
+import { useState, useEffect } from "react"
+import ElectionInfo from '../../components/electionInfo';
+import { inter } from '../../utils/fonts';
+import Link from 'next/link';
 import Image from 'next/image';
-import Link from 'next/link'; // Import Link from Next.js
-import { useState, useEffect } from 'react';
 
 export default function Menu() {
 
@@ -27,7 +29,7 @@ export default function Menu() {
         {/* Wrap each block with Link */}
 
         {!montrealBoolean &&
-        <h2>No news stories available for your postal code.</h2>   
+        <h2> No news stories currently available for your postal code. </h2>   
     }
 
     {montrealBoolean &&
@@ -79,7 +81,34 @@ export default function Menu() {
           font-size: 30px;
           
         }
-      `}</style>
+        
+                        .electionsContainer {
+                            display: flex;
+                            flex-direction: row;
+                            height: 580px;
+                            gap: 20px;
+                        }
+                        .linkContainer {
+                            display: flex;
+                            flex-direction: row;
+                            height: 100px;
+                            gap: 10px;
+                        }
+                        main {
+                            display: flex;
+                            flex-direction: column; /* Set to column for vertical stacking */
+                            align-items: center; /* Center items horizontally */
+                            background-color: #f5f5f5; /* Set the background color */
+                            padding: 20px;
+                            height: calc(100vh - 70px);
+                        }
+                        h2 {
+                            font-size: 24px;
+                            margin: 0 20px; /* Add space around text */
+                        }
+                    `
+        
+      }</style>
 
       <style jsx global>{`
         /* Your global styles here */

@@ -1,4 +1,6 @@
 import Navbar from '../../components/navbar';
+
+import styles from '../../styles/Home.module.css';
 import Head from 'next/head';
 import { useState, useEffect } from "react"
 import ElectionInfo from '../../components/electionInfo';
@@ -30,7 +32,9 @@ export default function Elections() {
         }
 
         console.log(myData);
+        
     }, [])
+    const montrealBoolean = !(myData.zip.slice(0, 3) < "H1A" || myData.zip.slice(0, 3) > "H5B");
     return (
         <div className={inter.className}>
             <Navbar pageName={`${myData.zip} / Elections`} homePage={false}/>
@@ -38,25 +42,39 @@ export default function Elections() {
                 <title>Elections</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+
+            
             <main>
-                <h1>Recent elections</h1>
-                <div className ="electionsContainer">
-                    <ElectionInfo ElectionType={myData.electionsData?.fedData?.name} ElectionDate={myData.electionsData?.fedData?.election_date}/>
-                    <ElectionInfo ElectionType={myData.electionsData?.provData?.name} ElectionDate={myData.electionsData?.provData?.election_date}/>
-                </div>
-                <Link href="https://www.electionsquebec.qc.ca/en/vote/making-sure-your-name-is-on-the-list-of-electors/">
-                    <div className ="linkContainer">
-                    <Image  
-                            src="/images/elections-quebec.jpg"
-                            width={179}
-                            height={52}
-                            alt="Elections Quebec"
-                        />
-                        <p>Check your eligibility to vote in Quebec here!</p>
-                        
+                { montrealBoolean &&
+                <div>
+                    <h1>Recent elections</h1>
+                    <div className ="electionsContainer">
+                        <ElectionInfo ElectionType={myData.electionsData?.fedData?.name} ElectionDate={myData.electionsData?.fedData?.election_date}/>
+                        <ElectionInfo ElectionType={myData.electionsData?.provData?.name} ElectionDate={myData.electionsData?.provData?.election_date}/>
                     </div>
-                </Link>
+                    <Link href="https://www.electionsquebec.qc.ca/en/vote/making-sure-your-name-is-on-the-list-of-electors/">
+                        <div className ="linkContainer">
+                        <Image  
+                                src="/images/elections-quebec.jpg"
+                                width={179}
+                                height={52}
+                                alt="Elections Quebec"
+                            />
+                            <p>Check your eligibility to vote in Quebec here!</p>
+                            
+                        </div>
+                    </Link>
+                </div>
+                }
+                { !montrealBoolean &&
+                <div>
+                    <h2>No election information currently available for your postal code.</h2>
+                    
+                </div>
+                }
+
             </main>
+            
             <style jsx>
                 {
                     `
@@ -71,6 +89,18 @@ export default function Elections() {
                             flex-direction: row;
                             height: 100px;
                             gap: 10px;
+                        }
+                        main {
+                            display: flex;
+                            flex-direction: column; /* Set to column for vertical stacking */
+                            align-items: center; /* Center items horizontally */
+                            background-color: #f5f5f5; /* Set the background color */
+                            padding: 20px;
+                            height: calc(100vh - 70px);
+                        }
+                        h2 {
+                            font-size: 24px;
+                            margin: 0 20px; /* Add space around text */
                         }
                     `
                 }
