@@ -14,8 +14,8 @@ export default function Menu() {
     setMyData({zip: sessionStorage.getItem("zipcode")});
   }, []);
 
-  const montrealBoolean = (myData.zip.charAt(0) === "H");
-
+  const montrealBoolean = !(myData.zip.slice(0, 3) < "H1A" || myData.zip.slice(0, 3) > "H5B");
+  
   return (
     <div>
       <Navbar pageName={myData.zip + " News Stories"} homePage={false}/>
