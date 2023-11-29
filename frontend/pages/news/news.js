@@ -10,8 +10,8 @@ const updateUserStatus = async (userId) => {
     // Implement the logic to update the user's status in your database
     // This could involve making a request to your server or using a client-side SDK
     console.log("Updating user status in the database...");
-    
-    // TODO add a point to the user with userID
+    // TODO add a point to the user with userId
+
 
     // Example: Using fetch to make a POST request to your server
     // Replace this with the actual logic for your database update
@@ -41,7 +41,7 @@ export default function News() {
         
 
       } catch (error) {
-        //alert("Error occurred while finding user!")
+        
         localStorage.setItem("userId", "");
         
       }
@@ -219,6 +219,7 @@ const [doneClicked, setDoneClicked] = useState(false);
             <div className="doneButtonContainer">
               <button
                 onClick={handleDoneClick}
+                
                 style={{ backgroundColor: doneClicked ? "#4caf50" : "", color: doneClicked ? "white" : "black" }}
               >
                 Done
