@@ -46,7 +46,9 @@ export default function UserProfile() {
         <div className={`pointsCounter ${leagueGothic.className}`}>
           You have {userData.points} points
         </div>
-        <h2>Achievements</h2>
+        <br/><br/><br/><br/>
+        <hr></hr>
+        <h2 className={inter.className}>Achievements</h2>
         {/* Achievement Display */}
         {isAchievementVisible && (
           <div className="achievementContainer">
@@ -64,8 +66,8 @@ export default function UserProfile() {
         {!isAchievementVisible && (
           <div className="achievementContainer">
             <Image 
-                src="/images/news.jpg"
-                width={50}
+                src="/images/question.jpg"
+                width={60}
                 height={50}
                 alt="News Novice"
             />
