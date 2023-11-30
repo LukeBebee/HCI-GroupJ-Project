@@ -5,60 +5,34 @@ import Head from 'next/head';
 import { inter } from '../../utils/fonts';
 
 
-// Example function to update user status in the database
-const updateUserStatus = async (userId) => {
-    // Implement the logic to update the user's status in your database
-    // This could involve making a request to your server or using a client-side SDK
-    console.log("Updating user status in the database...");
-    // TODO add a point to the user with userId
-
-
-    // Example: Using fetch to make a POST request to your server
-    // Replace this with the actual logic for your database update
-    // await fetch('/api/updateUserStatus', { method: 'POST' });
-  };
 
 export default function News() {
-  var loggedIn = false;
-  var userId = "";
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(`/api/userData/${localStorage.getItem('userId')}`, {
-          method: 'GET'
-        })
-        if (!res.ok) {
-          throw new Error(res.status.toString());
-        }
-        else {
-          loggedIn = true;
-          
-        }
-        const data = await res.json();
-        console.log(data);
-        setUserData(data.data);
-        userId = data.data;
-        
-
-      } catch (error) {
-        
-        localStorage.setItem("userId", "");
-        
-      }
-    }
-    fetchData();
-  }, []) // run only on the first render
-
-
 
     
 
+// Example function to update user status in the database
+const updateUserStatus = async () => {
+  // Implement the logic to update the user's status in your database
+  // This could involve making a request to your server or using a client-side SDK
+  try {
+    const res = await fetch(`/api/userData/setUserPoints`, {
+      method: 'POST',
+      body: JSON.stringify({id: localStorage.getItem('userId'), points: 5})
+    })
+    if (!res.ok) {
+      throw new Error(res.status.toString());
+    }
+
+  } catch (error) {
+    alert("Error occurred while updating user!")
+  }
+};
 
   // State to store user responses and correctness
   const [responses, setResponses] = useState([]);
 // State to track whether the user has clicked "Done"
 const [doneClicked, setDoneClicked] = useState(false);
-  // Function to handle user responses
+   // Function to handle user responses
   const handleResponse = (questionIndex, selectedOption) => {
     // Check if the selected option is correct (you can implement your logic here)
     const isCorrect = selectedOption === "optionB"; // Assuming "optionB" is the correct option
@@ -77,13 +51,17 @@ const [doneClicked, setDoneClicked] = useState(false);
     // setQuizCompleted(true);
 
     // Update the user's status in the database
-    try {
-      await updateUserStatus(userId);
-      setDoneClicked(true);
-      console.log("User status updated successfully.");
-    } catch (error) {
-      console.error("Error updating user status:", error);
+    setDoneClicked(true);
+    if (localStorage.getItem('userId')) {
+      try {
+        await updateUserStatus();
+        
+        console.log("User status updated successfully.");
+      } catch (error) {
+        console.error("Error updating user status:", error);
+      }
     }
+
   };
 
   // Function to get the background color for the buttons
@@ -224,10 +202,10 @@ const [doneClicked, setDoneClicked] = useState(false);
               >
                 Done
               </button>
-              {doneClicked && !loggedIn &&(
+              {doneClicked && !localStorage.getItem('userId') &&(
                 <p className="doneMessage">Log in to receive credit for reading the article!</p>
               )}
-              {doneClicked && loggedIn &&(
+              {doneClicked && localStorage.getItem('userId') &&(
                 <p className="doneMessage">You received credit for the article! Check your account to see updates to your achievements.</p>
               )}
             </div>
