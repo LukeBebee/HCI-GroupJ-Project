@@ -1,11 +1,13 @@
 // components/Menu.js
-import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
+
 import Navbar from '../../components/navbar';
-import { inter } from "../../utils/fonts";
+import styles from '../../styles/Home.module.css';
+import Head from 'next/head';
+import { useState, useEffect } from "react"
+import ElectionInfo from '../../components/electionInfo';
+import { inter } from '../../utils/fonts';
+import Link from 'next/link';
 import Image from 'next/image';
-import Link from 'next/link'; // Import Link from Next.js
-import { useState, useEffect } from 'react';
 
 export default function Menu() {
 
@@ -14,9 +16,11 @@ export default function Menu() {
     setMyData({zip: sessionStorage.getItem("zipcode")});
   }, []);
 
+  const montrealBoolean = !(myData.zip.slice(0, 3) < "H1A" || myData.zip.slice(0, 3) > "H5B");
+  
   return (
-    <div>
-      <Navbar pageName={myData.zip} homePage={false}/>
+    <div className={inter.className}>
+      <Navbar pageName={myData.zip + " News Stories"} homePage={false}/>
       <Head>
         <title>Election Information</title>
         <link rel="icon" href="/favicon.ico" />
@@ -24,31 +28,20 @@ export default function Menu() {
       <main>
         {/* Wrap each block with Link */}
 
-        <Link href="/elections/elections" style={{textDecoration: "none"}}>
-          <div className="menuBlock"> 
-            <i className="bi bi-clipboard-data bigIcon"></i>
-            <h2 className={inter.className}>Elections</h2>
-            <div></div>
-            <i className="bi bi-chevron-double-right rightChev"></i>
-          </div>
-        </Link>
-        <Link href="/news/storySelection" style={{textDecoration: "none"}}>
+        {!montrealBoolean &&
+        <h2> No news stories are currently available for your postal code. </h2>   
+    }
+
+    {montrealBoolean &&
+        <Link href="./news" style={{textDecoration: "none"}}>
         <div className="menuBlock"> 
             <i className="bi bi-newspaper bigIcon"></i>
-            <h2 className={inter.className}>News</h2>
+            <h2 className={inter.className}>Montreal News: Notice – Intention to Withdraw Authorization: Quartiers Montréal</h2>
             <div></div>
             <i className="bi bi-chevron-double-right rightChev"></i>
       </div>    
         </Link>
-        <Link href="/representatives/representatives" style={{textDecoration: "none"}}>
-        <div className="menuBlock"> 
-            <i className="bi bi-person-video2 bigIcon"></i>
-            <h2 className={inter.className}>Representatives</h2>
-            <div></div>
-            <i className="bi bi-chevron-double-right rightChev"></i>
-          </div>
-
-        </Link>
+    }
       </main>
       <style jsx>{`
         main {
@@ -80,6 +73,7 @@ export default function Menu() {
         h2 {
           font-size: 24px;
           margin: 0 20px; /* Add space around text */
+
         }
         .bigIcon {
           font-size: 50px;
@@ -88,7 +82,34 @@ export default function Menu() {
           font-size: 30px;
           
         }
-      `}</style>
+        
+                        .electionsContainer {
+                            display: flex;
+                            flex-direction: row;
+                            height: 580px;
+                            gap: 20px;
+                        }
+                        .linkContainer {
+                            display: flex;
+                            flex-direction: row;
+                            height: 100px;
+                            gap: 10px;
+                        }
+                        main {
+                            display: flex;
+                            flex-direction: column; /* Set to column for vertical stacking */
+                            align-items: center; /* Center items horizontally */
+                            background-color: #f5f5f5; /* Set the background color */
+                            padding: 20px;
+                            height: calc(100vh - 70px);
+                        }
+                        h2 {
+                            font-size: 24px;
+                            margin: 0 20px; /* Add space around text */
+                        }
+                    `
+        
+      }</style>
 
       <style jsx global>{`
         /* Your global styles here */
